@@ -6,8 +6,39 @@ window.onload = function(){
 	var birthday = function(date){
 		
 
+	/*try {
+		if (date  === isNaN){
+			throw "Du måste fylla i datumet i formen ÅÅÅÅ-MM-DD";
+		}
+	}
+	catch (error){
+		return error;
+	} */
+	
+	
+	/* var d = new Date();
+	var timeSinceZero = d.getTime();
+	//var years = ((((1000 * 60)*60)*24)*365);
 
-			// Din kod här.
+	
+	timeSinceZero = Math.round(timeSinceZero / years); */
+	//var input = date.split("-");
+	
+	
+	var d = new Date();
+	var currentYear = d.getFullYear();
+	var currentMonth = (d.getMonth()+1);
+	var currentDay = d.getDate();
+	
+	var currentDate = (currentYear + "-" + currentMonth + "-" + currentDay);
+	
+	
+	/*
+	try-catch, fel format (! ÅÅÅÅ-MM-DD)
+	räkna ut hur många dagar till B day
+	returnera answer
+	http://www.w3schools.com/jsref/jsref_obj_date.asp
+	*/
 
 
 
