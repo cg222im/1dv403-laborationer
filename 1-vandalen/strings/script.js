@@ -4,33 +4,28 @@ window.onload = function(){
 
 	// I denna funktion ska du skriva koden för att hantera "spelet"
 	var convertString = function(str){
-		// Plats för förändring.		
-		// Returnera den konverterade strängen.
-		// Vid fel, kasta ett undantag med ett meddelande till användaren. 
-	
 
 		// Variabel för placering i array
 		var n = 0;
 		var string = "";
 		
 		do{
-			
-			if (str[n] == str[n].toUpperCase()){
+			if (str[n] === "a" || str[n] === "A"){
+				string += '#';
+			}
+			else if (str[n] == str[n].toUpperCase()){
 				string += str[n].toLowerCase();
 			}
 			else if (str[n] == str[n].toLowerCase()){
 				string += str[n].toUpperCase();
-			} 
+			}
 			n += 1;
 		}while (n < str.length);
 		
 		return string;
 	
 		/* 
-		Ändra alla versaler till gemener
-		Ändra alla gemener till versaler
-		Ändra alla "aA" till "#"
-		Även Svenska tecken
+
 
 		returnera
 		throw-catch om använder klickar på omvandla utan input
