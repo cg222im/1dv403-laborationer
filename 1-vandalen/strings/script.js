@@ -9,6 +9,21 @@ window.onload = function(){
 		var n = 0;
 		var string = "";
 		
+		// Felhantering av tomt input	
+		try {
+			if (str === ""){
+				document.getElementById("value").style.backgroundColor = "red";
+                document.getElementById("value").style.display = "block"; 
+                document.getElementById("value").style.width = "260px"; 
+
+				throw "FEL! Du måste ange något att invertera.";
+			}
+			}
+		catch(err){
+			return err;
+		}
+		
+		// Gå igenom sträng och konvertera tecken
 		do{
 			if (str[n] === "a" || str[n] === "A"){
 				string += '#';
@@ -22,16 +37,9 @@ window.onload = function(){
 			n += 1;
 		}while (n < str.length);
 		
+		document.getElementById("value").style.backgroundColor = "white";
 		return string;
 	
-		/* 
-
-
-		returnera
-		throw-catch om använder klickar på omvandla utan input
-		*/
-
-
 	};
 	// ------------------------------------------------------------------------------
 
