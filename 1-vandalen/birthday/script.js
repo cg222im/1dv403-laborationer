@@ -5,48 +5,59 @@ window.onload = function(){
 	
 	var birthday = function(date){
 		
-
-	/*try {
-		if (date  === isNaN){
-			throw "Du måste fylla i datumet i formen ÅÅÅÅ-MM-DD";
-		}
-	}
-	catch (error){
-		return error;
-	} */
-	
 	// Tid sedan Zero
     var today = new Date();
-	// Inmatat datum splittas och görs till ett Date()
+    
+	// Inmatat datum splittas och görs om till ett Date()
     var birthday = date.split("-");
+
+	try {
+		if (birthday[0] === undefined){
+			throw "Du måste fylla i datumet i formen ÅÅÅÅ-MM-DD";
+		}
+		else if (birthday[1] === undefined){
+			throw "Du måste fylla i datumet i formen ÅÅÅÅ-MM-DD";
+		}
+		else if (birthday[2] === undefined){
+			throw "Du måste fylla i datumet i formen ÅÅÅÅ-MM-DD";
+		}
+		else if (birthday[0].length > 3){
+			throw "Du måste fylla i datumet i formen ÅÅÅÅ-MM-DD";
+		}
+		else if (birthday[1].length > 2) {
+			throw "Du måste fylla i datumet i formen ÅÅÅÅ-MM-DD";
+		}
+		else if (birthday[2].length > 2) {
+			throw "Du måste fylla i datumet i formen ÅÅÅÅ-MM-DD";
+		}
+		
+		
+		
+		
+	}
+	catch(err){
+		return err;
+		
+	}
+	
+	
+	
+	
+	
+	
 	birthday = new Date(birthday);
 	
 	// Sätter inmatat år till nuvarande för omräkning
     birthday.setFullYear(today.getFullYear());
     // ...om födelsedag infaller nästa år...
     if (today > birthday) {
-        birthday.setFullYear(today.getFullYear() + 1);}
+        birthday.setFullYear(today.getFullYear() + 1);} // "Du fyller år om 365 dagar " ??? 
                                                        
     // Räknar ut tid kvar och konverterar dagar                                                      
     var timeLeft = Math.floor(((birthday - today) / (1000*60*60*24))+1);
 
 	// Returnerar antal dagar kvar tills födelsedag
 	return timeLeft;
-
-	
-
-
-	
-	/*
-	try-catch, fel format (! ÅÅÅÅ-MM-DD)
-	räkna ut hur många dagar till B day
-	returnera answer
-	http://www.w3schools.com/jsref/jsref_obj_date.asp
-	http://stackoverflow.com/questions/21090221/calculate-days-remaining-until-next-birthday-in-javascript
-	*/
-
-
-
 
 	};
 	// ------------------------------------------------------------------------------
