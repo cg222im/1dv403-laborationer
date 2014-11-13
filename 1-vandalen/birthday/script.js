@@ -44,7 +44,7 @@ window.onload = function(){
 		        birthday.setFullYear(today.getFullYear() + 1);} 
 		                                                       
 		    // Räknar ut tid kvar och konverterar till dagar                                                      
-		    var timeLeft = Math.floor(((birthday - today) / (1000*60*60*24))+1); // "Du fyller år om 365 dagar " ???     <------- ? 
+		    var timeLeft = Math.floor(((birthday - today) / (1000*60*60*24))+1); // "Du fyller år om 365 dagar " ???     <------- ? är det pga att jag inte hanterar ms?
 		
 			// Returnerar antal dagar kvar tills födelsedag
 			return timeLeft;			
