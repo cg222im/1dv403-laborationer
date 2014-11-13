@@ -15,29 +15,34 @@ window.onload = function(){
 		return error;
 	} */
 	
+	// Tid sedan Zero
+    var today = new Date();
+	// Inmatat datum splittas och görs till ett Date()
+    var birthday = date.split("-");
+	birthday = new Date(birthday);
 	
-	/* var d = new Date();
-	var timeSinceZero = d.getTime();
-	//var years = ((((1000 * 60)*60)*24)*365);
+	// Sätter inmatat år till nuvarande för omräkning
+    birthday.setFullYear(today.getFullYear());
+    // ...om födelsedag infaller nästa år...
+    if (today > birthday) {
+        birthday.setFullYear(today.getFullYear() + 1);}
+                                                       
+    // Räknar ut tid kvar och konverterar dagar                                                      
+    var timeLeft = Math.floor(((birthday - today) / (1000*60*60*24))+1);
+
+	// Returnerar antal dagar kvar tills födelsedag
+	return timeLeft;
 
 	
-	timeSinceZero = Math.round(timeSinceZero / years); */
-	//var input = date.split("-");
-	
-	
-	var d = new Date();
-	var currentYear = d.getFullYear();
-	var currentMonth = (d.getMonth()+1);
-	var currentDay = d.getDate();
-	
-	var currentDate = (currentYear + "-" + currentMonth + "-" + currentDay);
-	
+
+
 	
 	/*
 	try-catch, fel format (! ÅÅÅÅ-MM-DD)
 	räkna ut hur många dagar till B day
 	returnera answer
 	http://www.w3schools.com/jsref/jsref_obj_date.asp
+	http://stackoverflow.com/questions/21090221/calculate-days-remaining-until-next-birthday-in-javascript
 	*/
 
 
