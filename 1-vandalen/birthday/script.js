@@ -11,53 +11,55 @@ window.onload = function(){
 	// Inmatat datum splittas och görs om till ett Date()
     var birthday = date.split("-");
 
+	// Felhantering av inmatning -- skriver alltid ut default switch: message + err
 	try {
+		
 		if (birthday[0] === undefined){
-			throw "Du måste fylla i datumet i formen ÅÅÅÅ-MM-DD";
+			throw "Du måste fylla i datumet i formatet ÅÅÅÅ-MM-DD";
 		}
 		else if (birthday[1] === undefined){
-			throw "Du måste fylla i datumet i formen ÅÅÅÅ-MM-DD";
+			throw "Du måste fylla i datumet i formatet ÅÅÅÅ-MM-DD";
 		}
 		else if (birthday[2] === undefined){
-			throw "Du måste fylla i datumet i formen ÅÅÅÅ-MM-DD";
+			throw "Du måste fylla i datumet i formatet ÅÅÅÅ-MM-DD";
 		}
-		else if (birthday[0].length > 3){
-			throw "Du måste fylla i datumet i formen ÅÅÅÅ-MM-DD";
+		else if (birthday[0].length > 4){
+			throw "Du måste fylla i datumet i formatet ÅÅÅÅ-MM-DD";
 		}
 		else if (birthday[1].length > 2) {
-			throw "Du måste fylla i datumet i formen ÅÅÅÅ-MM-DD";
+			throw "Du måste fylla i datumet i formatet ÅÅÅÅ-MM-DD";
 		}
 		else if (birthday[2].length > 2) {
-			throw "Du måste fylla i datumet i formen ÅÅÅÅ-MM-DD";
+			throw "Du måste fylla i datumet i formatet ÅÅÅÅ-MM-DD";
 		}
 		
+		else {
+			// Om inmatning är korrekt, räkna ut hur lång tid det är kvar
+			birthday = new Date(birthday);
+			
+			// Sätter inmatat år till nuvarande för omräkning
+		    birthday.setFullYear(today.getFullYear());
+		    // ...om födelsedag redan infallt i år...
+		    if (today > birthday) {
+		        birthday.setFullYear(today.getFullYear() + 1);} 
+		                                                       
+		    // Räknar ut tid kvar och konverterar till dagar                                                      
+		    var timeLeft = Math.floor(((birthday - today) / (1000*60*60*24))+1); // "Du fyller år om 365 dagar " ???     <------- ? 
 		
-		
+			// Returnerar antal dagar kvar tills födelsedag
+			return timeLeft;			
+		}
 		
 	}
 	catch(err){
-		return err;
+		p.classList.add( "error"); // Växla CSS-klass, IE10+
+		p.innerHTML = err;
 		
+		alert(err); 														// popup som samtidigt låter felmeddelandet visas i p..??    <-------
+		//return err;														// hur annars få felmeddelande att visas utan att lägga allt på sidan i try-satsen?
 	}
 	
-	
-	
-	
-	
-	
-	birthday = new Date(birthday);
-	
-	// Sätter inmatat år till nuvarande för omräkning
-    birthday.setFullYear(today.getFullYear());
-    // ...om födelsedag infaller nästa år...
-    if (today > birthday) {
-        birthday.setFullYear(today.getFullYear() + 1);} // "Du fyller år om 365 dagar " ??? 
-                                                       
-    // Räknar ut tid kvar och konverterar dagar                                                      
-    var timeLeft = Math.floor(((birthday - today) / (1000*60*60*24))+1);
 
-	// Returnerar antal dagar kvar tills födelsedag
-	return timeLeft;
 
 	};
 	// ------------------------------------------------------------------------------
