@@ -44,29 +44,22 @@ window.onload = function(){
 		        birthday.setFullYear(today.getFullYear() + 1);} 
 		                                                       
 		    // Räknar ut tid kvar och konverterar till dagar                                                      
-		    var timeLeft = Math.floor(((birthday - today) / (1000*60*60*24))+1);
-		
-			// Om födelsedag infaller idag om 365 dagar, sätt timeLeft till 0
-			if (timeLeft === 365) {
-				timeLeft = 0;
-			}
+		    var timeLeft = Math.ceil((birthday - today) / (1000*60*60*24));
+		    
+			// Om födelsedag infaller idag om 365 dagar...
+			if (timeLeft >= 365) {
+				timeLeft = (timeLeft - 365);
+			} 
 		
 			// Returnerar antal dagar kvar tills födelsedag
 			return timeLeft;	
-
 		}
 	
 	}
 	catch(err){
-		p.classList.add( "error"); // Växla CSS-klass, IE10+
-		p.innerHTML = err;
-		
-		alert(err); 														// popup som samtidigt låter felmeddelandet visas i p.innerHTML??    <-------
-		//return err;														// hur annars få felmeddelande att visas utan att lägga allt på sidan i try-satsen?
+		throw new Error(err);
 	}
 	
-
-
 	};
 	// ------------------------------------------------------------------------------
 
