@@ -2,26 +2,19 @@
 
 var makePerson = function(persArr){
 
-
+    // Skapar en array med namn
     var names = persArr.map(function(pers){
         return pers.name;
     });    
-      
-    //var names= persArr[0].name + ", " + persArr[1].name + ", " + persArr[2].name;
 
-    // Sorterar array med namn <--- ÅÄÖ??
+    // Sorterar array med namn
     names.sort(function(a,b) {
         return a.localeCompare(b);
     }); 
     
-    /*
-    //Array med endast ålder        
-    console.log(persArr[0].age + ", " + persArr[1].age + ", "+  persArr[2].age);        
-    var ageArr = persArr[0].age + ", " + persArr[1].age + ", "+  persArr[2].age;    */
-
-    var ageArr = persArr.map(function(age){
-    console.log(persArr[0].age + ", " +  persArr[1].age + ", " + persArr[2].age);
-    return persArr[0].age + ", " +  persArr[1].age + ", " + persArr[2].age;
+    // Skapar en array med ålder
+    var ageArr = persArr.map(function(pers){
+        return pers.age;
     }); 
 
     // Uträkningar med ålder
@@ -32,7 +25,7 @@ var makePerson = function(persArr){
     // Formaterar sträng med namn
     names = names.join(", "); 
 
-    // Sätter result objekt och returnerar                                                       
+    // Sätter result-objekt och returnerar                                                       
     var result = {averageAge: averageAge,
 	     maxAge: maxAge,
 	     minAge: minAge,
