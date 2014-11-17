@@ -6,7 +6,19 @@ var makePerson = function(persArr){
     var names = persArr.map(function(pers){
         return pers.name;
     });    
-
+    
+    // Felhantering av namn
+    var i = 0;
+    do {
+        try {
+            if (typeof names[i] !== 'string') throw "is not a string";
+            if (names[i] === undefined || persArr.name === null) throw "is empty or undefined";
+            i++;
+        }
+        catch (error){
+            alert("Name " + error);
+    }}while (names[i]);
+    
     // Sorterar array med namn
     names.sort(function(a,b) {
         return a.localeCompare(b);
@@ -16,6 +28,17 @@ var makePerson = function(persArr){
     var ageArr = persArr.map(function(pers){
         return pers.age;
     }); 
+
+    // Felhantering av ålder
+    var y = 0;
+    do {
+        try {
+            if (ageArr[y] === isNaN) throw "is not a number";
+            y++;
+        }
+        catch (error){
+            alert("Age " + error);
+    }}while (ageArr[y]);
 
     // Uträkningar med ålder
     var minAge = Math.min.apply(Math, ageArr);
@@ -32,14 +55,5 @@ var makePerson = function(persArr){
 	     names: names};
 
     return result;
-    
-   
 
- 
-
-    /*
-    * = utan loopar (for, while, do...while), if, switch
-        felhantering: saker innehåller det de ska (här fås if/switch osv användas)
-    */
 };
-
