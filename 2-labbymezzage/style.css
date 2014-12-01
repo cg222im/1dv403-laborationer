@@ -1,0 +1,19 @@
+#main
+{
+    width: 600px;
+    padding: 1px;
+    height: auto;
+    background-color: #DCDCDC;
+}
+
+#logo
+{
+    display: block;
+    width: 600px;
+    height: 120px;
+    background-image: url("img/logo.jpg");    
+    background-repeat: no-repeat;
+    margin-left: auto;
+    margin-right: auto;
+    
+}
