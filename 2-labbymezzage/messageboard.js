@@ -22,18 +22,32 @@ function MessageBoard() //kan slänga in boardId för flera brädor
     };
 }
 
+MessageBoard.prototype.renderMessageBoard = function(main, _boardId)
+{
+    var that = this;
+    
+    // Skapar meddelandetavla
+    var boardNode = document.createElement("div");
+    boardNode.id = _boardId;
+    boardNode.className = "messageBoard";
+    
+    var messageContainerNode = document.createElement("div");
+    messageContainerNode.className="messageContainer";
+    
+    var numberOfMessages = document.createElement("div");
+    numberOfMessages.className = "numberOfMessages";
+    
+    var textArea = document.createElement("textArea");
+    textArea.className = "textAreaInput";
+    
+    
+}
+
 window.onload = function(){
   
     new MessageBoard("board1");
     
-    //tester moment 2
-    /*
-    var mess = new Message("Testmeddelande", new Date());
-    alert(mess);
-    alert(mess.getText());
-    mess.setText("blesk");
-    alert(mess);
-    */
+
 };
 
 
