@@ -19,7 +19,7 @@ function MessageBoard(boardId) //kan slänga in boardId för flera brädor
     };
     
     
-    var main = document.getELementById("main");
+    var main = document.getElementById("main");
     
     // Laddar MessageBoard
     this.renderMessageBoard(main, boardId);
@@ -60,7 +60,7 @@ MessageBoard.prototype.renderMessageBoard = function(main, _boardId)
     // Skapar knapp för att sända meddelande
     var submitButton = document.createElement("button");
     submitButton.className = "messageButton";
-    submitButton.innerHTML = "Many Message";
+    submitButton.innerHTML = "Many Mezzage";
     submitButton.onclick = function(e)
     {
         that.submitButtonOnClick(textArea); 
@@ -117,15 +117,18 @@ MessageBoard.prototype.renderMessage = function(messageId)
     // Skapar nod för meddelande
     var newMessageNode = document.createElement("div");
     newMessageNode.className = "message";
+    console.log("skapar nod för meddelande");
     
     // Skapar sträng för innehåll och lägg till innehåll till sidan
     var htmlString =    "<div>" + this.getMessages()[messageId].getHTMLText() + "</div>" +
                         "<div class=\"timeStamp\">" + this.getMessages()[messageId].getTimeStamp() + "</div>";
     newMessageNode.innerHTML = htmlString;
+    console.log("skapar sträng för innehål");
                         
     // Skapar element för stängning av meddelande
     var closeNode = document.createElement("div");
     closeNode.className = "close";
+        console.log("blesk1");
     
     // Skapar element för att visa datum och tid
     var dateAlertNode = document.createElement("div");
