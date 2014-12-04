@@ -1,5 +1,6 @@
 
-function Message(message, date)
+var Message = function() {};
+window.Message = function(message, date)
 {
     this.getText = function(){
         return message;
@@ -16,14 +17,15 @@ function Message(message, date)
     this.setDate = function(_date){
         date = _date;
     };
-}
+};
 
+// Lägga till formatering för datum!
 Message.prototype.toString = function(){
     return this.getText() +" ("+this.getDate()+")";
 };
 
 Message.prototype.getHTMLText = function(){
-    return this.GetText().replace(/[\n\r]/g, "<br />");
+    return this.getText().replace(/[\n\r]/g, "<br />");
 };
 
 Message.prototype.getDateText = function (){

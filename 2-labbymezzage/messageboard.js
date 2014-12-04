@@ -1,4 +1,4 @@
-function MessageBoard(boardId) //kan slänga in boardId för flera brädor
+function MessageBoard(boardId)
 {
     // Skapar array för meddelanden
     var messages = [];
@@ -18,14 +18,13 @@ function MessageBoard(boardId) //kan slänga in boardId för flera brädor
         messages.splice(messageId, 1);
     };
     
-    
     var main = document.getElementById("main");
     
     // Laddar MessageBoard
     this.renderMessageBoard(main, boardId);
     
-    // Laddar antal meddelanden
-    this.updateNumberofMessages();
+    // Laddar antal meddelanden                <---------- funkar ej?
+    //this.updateNumberofMessages();
     
     // Laddar meddelanden
     this.renderMessages();
@@ -59,10 +58,12 @@ MessageBoard.prototype.renderMessageBoard = function(main, _boardId)
     
     // Skapar knapp för att sända meddelande
     var submitButton = document.createElement("button");
+    submitButton.setAttribute("type", "submit");
     submitButton.className = "messageButton";
     submitButton.innerHTML = "Many Mezzage";
     submitButton.onclick = function(e)
     {
+        alert("nu borde det skapas en textruta som säger: " + textArea.value);
         that.submitButtonOnClick(textArea); 
         return false;
     };
@@ -81,11 +82,12 @@ MessageBoard.prototype.submitButtonOnClick = function(textArea)
     // Hämtar texten för meddelandet
     var text = textArea.value;
     
-    // Felhantering, om något är skrivet
+    // Om något är skrivet, så ... ----------- new Message(text, date) funkar inte?
     if (text.length > 0)
     {
         // Skapa ett nytt meddelande --- Varför vill den inte?   <------------
-        var newMessage = new Message(text, new Date());
+        var newMessage = new window.Message(text, new Date());
+        alert(newMessage);
 
         // Lägger till meddelande till array
         this.addMessage(newMessage);
@@ -102,6 +104,7 @@ MessageBoard.prototype.submitButtonOnClick = function(textArea)
 // Funktionalitet för knappen - Enter key
 MessageBoard.prototype.textAreaEventHandler = function(e)
 {
+    // Det här lirar ej
     if(!e) e = window.event;
     if (e.keyCode == 13)
     {
@@ -117,18 +120,15 @@ MessageBoard.prototype.renderMessage = function(messageId)
     // Skapar nod för meddelande
     var newMessageNode = document.createElement("div");
     newMessageNode.className = "message";
-    console.log("skapar nod för meddelande");
     
-    // Skapar sträng för innehåll och lägg till innehåll till sidan
+    // Skapar sträng för innehåll och lägger till innehåll till sidan
     var htmlString =    "<div>" + this.getMessages()[messageId].getHTMLText() + "</div>" +
-                        "<div class=\"timeStamp\">" + this.getMessages()[messageId].getTimeStamp() + "</div>";
+                        "<div class=\"timeStamp\">" + this.getMessages()[messageId].getTimeStamp() + "</div>";  // <---------------
     newMessageNode.innerHTML = htmlString;
-    console.log("skapar sträng för innehål");
                         
     // Skapar element för stängning av meddelande
     var closeNode = document.createElement("div");
     closeNode.className = "close";
-        console.log("blesk1");
     
     // Skapar element för att visa datum och tid
     var dateAlertNode = document.createElement("div");
@@ -151,7 +151,7 @@ MessageBoard.prototype.renderMessage = function(messageId)
 };
 
 // Funktionalitet för att rensa och skriva ut meddelanden
-MessageBoard.prototype.renderMEssages = function()
+MessageBoard.prototype.renderMessages = function()
 {
     document.getElementsByClassName("messageContainer").innerHTML = "";
     for (var i = 0; i < this.getMessages().length; i++)
@@ -183,18 +183,23 @@ MessageBoard.prototype.showDateTimeAlert = function(messageId)
 MessageBoard.prototype.removeMessage = function(messageId)
 {
     var that = this;
-    if (window.confirm("Remove wow?"))
+    // Varför inte fungera ?? Syns ju bara när det finns meddelanden kanske!!
+    var removeButton = document.createElement("button");
+    removeButton.setAttribute("type", "button");
+    removeButton.className = "removeButton";
+    removeButton.innerHTML = "Remove Wow";
+    removeButton.onclick = function(e)
     {
         that.removeMessage(messageId);
         this.renderMessages();
         this.updateNumberOfMessages();
-    }
+    };
 };
 
 window.onload = function()
 {
     new MessageBoard("board1");
-    new MessageBoard("board2");    
+    //new MessageBoard("board2");    
 };
 
 

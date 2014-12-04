@@ -73,16 +73,12 @@
     margin-top: 5px;
 }
 
-.close
+.removeButton
 {
-    width: 16px;
-    height: 16px;
-    float: right;
-    position: relative;
-    top: -17px;
-    right: 1px;
-    background-image: url();
-    background-repeat: no-repeat;
+    float: left;
+    margin-right: -110px;
+    width: 100px;
+    height: 23px;
 }
 
 .dateAlert
