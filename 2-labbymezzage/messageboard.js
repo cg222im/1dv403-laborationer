@@ -13,9 +13,13 @@ function MessageBoard(boardId)
         messages.push(message);
     };
     
-    this.removeMessage = function (messageId)
+    this.removeMessage = function(messageId) // THE ONLY KNOWN ERROR IS HERE??
     {
         messages.splice(messageId, 1);
+        this.updateNumberOfMessages();
+        
+        this.renderMessages(); //to do with CHild?
+
     };
     
     var main = document.getElementById("main");
@@ -23,8 +27,8 @@ function MessageBoard(boardId)
     // Laddar MessageBoard
     this.renderMessageBoard(main, boardId);
     
-    // Laddar antal meddelanden                <---------- funkar ej?
-    //this.updateNumberofMessages();
+    // Laddar antal meddelanden
+    this.updateNumberOfMessages();
     
     // Laddar meddelanden
     this.renderMessages();
@@ -63,7 +67,6 @@ MessageBoard.prototype.renderMessageBoard = function(main, _boardId)
     submitButton.innerHTML = "Many Mezzage";
     submitButton.onclick = function(e)
     {
-        alert("nu borde det skapas en textruta som säger: " + textArea.value);
         that.submitButtonOnClick(textArea); 
         return false;
     };
@@ -76,18 +79,17 @@ MessageBoard.prototype.renderMessageBoard = function(main, _boardId)
     boardNode.appendChild(submitButton);
 };
 
-// Funktionalitet för knappen  ----- kommer inte åt Message() ??
+// Funktionalitet för knappen 
 MessageBoard.prototype.submitButtonOnClick = function(textArea)
 {
     // Hämtar texten för meddelandet
     var text = textArea.value;
     
-    // Om något är skrivet, så ... ----------- new Message(text, date) funkar inte?
+    // Om något är skrivet, så ... 
     if (text.length > 0)
     {
-        // Skapa ett nytt meddelande --- Varför vill den inte?   <------------
+        // Skapa ett nytt meddelande
         var newMessage = new window.Message(text, new Date());
-        alert(newMessage);
 
         // Lägger till meddelande till array
         this.addMessage(newMessage);
@@ -98,13 +100,16 @@ MessageBoard.prototype.submitButtonOnClick = function(textArea)
         // Uppdaterar antal meddelanden
         this.updateNumberOfMessages();
     }
+    else
+    {
+        alert("Please to not enter empty wow!");
+    }
     textArea.value = "";
 };
 
 // Funktionalitet för knappen - Enter key
 MessageBoard.prototype.textAreaEventHandler = function(e)
 {
-    // Det här lirar ej
     if(!e) e = window.event;
     if (e.keyCode == 13)
     {
@@ -122,10 +127,9 @@ MessageBoard.prototype.renderMessage = function(messageId)
     newMessageNode.className = "message";
     
     // Skapar sträng för innehåll och lägger till innehåll till sidan
-    var htmlString =    "<div>" + this.getMessages()[messageId].getHTMLText() + "</div>" +
-                        "<div class=\"timeStamp\">" + this.getMessages()[messageId].getTimeStamp() + "</div>";  // <---------------
+    var htmlString = "<div>" + this.getMessages()[messageId].getHTMLText() + "</div>" + "<div class =\"dateText\">" + this.getMessages()[messageId].getDateText() + "</div>";
     newMessageNode.innerHTML = htmlString;
-                        
+    
     // Skapar element för stängning av meddelande
     var closeNode = document.createElement("div");
     closeNode.className = "close";
@@ -138,9 +142,20 @@ MessageBoard.prototype.renderMessage = function(messageId)
     newMessageNode.appendChild(closeNode);
     newMessageNode.appendChild(dateAlertNode);
     
-    // Skapar onclick event
-    closeNode.onclick = function(){that.removeMessage(messageId)};
-    dateAlertNode.onclick = function(){that.showDateTimeAlert(messageId)};
+    // Skapar onclick event för nya knappar <----------- clean up when done
+    closeNode.onclick = function()
+    {
+        if (confirm("Remove Wow?"))
+        {
+            that.removeMessage(messageId);
+            messageElements[messageId].removeChild(newMessageNode);
+        }
+    };
+    
+    dateAlertNode.onclick = function()
+    {
+        that.showDateTimeAlert(messageId);
+    };
     
     // Lägger till det nya meddelandet till en behållare
     var messageElements = document.getElementsByClassName("messageContainer");
@@ -171,29 +186,13 @@ MessageBoard.prototype.updateNumberOfMessages = function()
     }
 };
 
-// Funktionalitet för att skrika ut när ett meddelande skrivits
+// Funktionalitet för att skrika ut när ett meddelande skrivits --- FIXA!
 MessageBoard.prototype.showDateTimeAlert = function(messageId)
 {
     var that = this;
+    alert("TIME WOW!!!");
     var alertMessage = "When wow: " + that.getMessages()[messageId].getFormatedDateTime();
     alert(alertMessage);
-};
-
-// Funktionalitet för att radera meddelanden
-MessageBoard.prototype.removeMessage = function(messageId)
-{
-    var that = this;
-    // Varför inte fungera ?? Syns ju bara när det finns meddelanden kanske!!
-    var removeButton = document.createElement("button");
-    removeButton.setAttribute("type", "button");
-    removeButton.className = "removeButton";
-    removeButton.innerHTML = "Remove Wow";
-    removeButton.onclick = function(e)
-    {
-        that.removeMessage(messageId);
-        this.renderMessages();
-        this.updateNumberOfMessages();
-    };
 };
 
 window.onload = function()

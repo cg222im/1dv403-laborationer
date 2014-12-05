@@ -28,6 +28,14 @@ Message.prototype.getHTMLText = function(){
     return this.getText().replace(/[\n\r]/g, "<br />");
 };
 
-Message.prototype.getDateText = function (){
+Message.prototype.getDateText = function(){
     return this.getDate().toLocaleTimeString();
+};
+
+Message.prototype.getFormatedDateText = function(){
+    var date = this.getDate();
+    
+    var formatedDate = date.getDate() + " " + date.getMonth() + " " + date.getFullYear() + " " + date.toLocaleTimeString();
+    
+    return formatedDate;
 };

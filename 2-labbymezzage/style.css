@@ -15,7 +15,6 @@
     background-repeat: no-repeat;
     margin-left: auto;
     margin-right: auto;
-    
 }
 
 .messageBoard
@@ -58,31 +57,43 @@
     height: 23px;
 }
 
-.timeStamp
+.dateText
 {
-    font-size: 12px;
+    font-size: 10px;
     font-weight: bold;
+    font-style: italic;
 }
 
 .message
 {
-    background-color: green;
-    border-style: dashed;
+    background-color: white;
+    border-style: double;
     border-width: 2px;
     border-color: blue;
     margin-top: 5px;
 }
 
-.removeButton
+.close
 {
-    float: left;
-    margin-right: -110px;
-    width: 100px;
-    height: 23px;
+    width: 16px;
+    height: 16px;
+    float: right;
+    position: relative;
+    top: -17px;
+    right: 1px;
+    background-image: url(img/remove.png);
+    background-repeat: no-repeat;
 }
 
 .dateAlert
 {
-    
+    width: 16px;
+    height: 16px;
+    float: right;
+    position: relative;
+    top: -17px;
+    right: 4px;
+    background-image: url(img/hourglass.png);
+    background-repeat: no-repeat;
 }
 
