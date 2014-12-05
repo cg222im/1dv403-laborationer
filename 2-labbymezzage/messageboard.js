@@ -13,13 +13,12 @@ function MessageBoard(boardId)
         messages.push(message);
     };
     
-    this.removeMessage = function(messageId) // THE ONLY KNOWN ERROR IS HERE??
+    // Tar bort meddelande från messages[]
+    this.removeMessage = function(messageId)
     {
         messages.splice(messageId, 1);
         this.updateNumberOfMessages();
-        
-        this.renderMessages(); //to do with CHild?
-
+        this.renderMessages();
     };
     
     var main = document.getElementById("main");
@@ -88,7 +87,7 @@ MessageBoard.prototype.submitButtonOnClick = function(textArea)
     // Om något är skrivet, så ... 
     if (text.length > 0)
     {
-        // Skapa ett nytt meddelande
+        // Skapar ett nytt meddelande
         var newMessage = new window.Message(text, new Date());
 
         // Lägger till meddelande till array
@@ -142,16 +141,17 @@ MessageBoard.prototype.renderMessage = function(messageId)
     newMessageNode.appendChild(closeNode);
     newMessageNode.appendChild(dateAlertNode);
     
-    // Skapar onclick event för nya knappar <----------- clean up when done
+    // Skapar onclick event för "remove"-knappen
     closeNode.onclick = function()
     {
         if (confirm("Remove Wow?"))
         {
             that.removeMessage(messageId);
-            messageElements[messageId].removeChild(newMessageNode);
+            // Tar bort meddelandet från DOMen
+            messageElements[messageId].removeChild(newMessageNode); // FUNGERAR EJ MED FLERA MEDDELANDEN
         }
     };
-    
+    // Skapar onclick event för "tids"-knappen
     dateAlertNode.onclick = function()
     {
         that.showDateTimeAlert(messageId);
@@ -186,12 +186,10 @@ MessageBoard.prototype.updateNumberOfMessages = function()
     }
 };
 
-// Funktionalitet för att skrika ut när ett meddelande skrivits --- FIXA!
+// Funktionalitet för att skrika ut när ett meddelande skrivits
 MessageBoard.prototype.showDateTimeAlert = function(messageId)
 {
-    var that = this;
-    alert("TIME WOW!!!");
-    var alertMessage = "When wow: " + that.getMessages()[messageId].getFormatedDateTime();
+    var alertMessage = "When Wow: " + this.getMessages()[messageId].getFormatedDateText();
     alert(alertMessage);
 };
 

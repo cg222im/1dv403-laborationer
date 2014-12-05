@@ -19,7 +19,6 @@ window.Message = function(message, date)
     };
 };
 
-// Lägga till formatering för datum!
 Message.prototype.toString = function(){
     return this.getText() +" ("+this.getDate()+")";
 };
@@ -28,14 +27,21 @@ Message.prototype.getHTMLText = function(){
     return this.getText().replace(/[\n\r]/g, "<br />");
 };
 
+// Formatting of dates follows here
 Message.prototype.getDateText = function(){
     return this.getDate().toLocaleTimeString();
 };
 
+var months = new Array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
+
 Message.prototype.getFormatedDateText = function(){
     var date = this.getDate();
     
-    var formatedDate = date.getDate() + " " + date.getMonth() + " " + date.getFullYear() + " " + date.toLocaleTimeString();
+    var formatedDate = date.getDate() + " " + numericMonth(date.getMonth()) + " " + date.getFullYear() + " -- " + date.toLocaleTimeString();
     
     return formatedDate;
 };
+function numericMonth(month)
+{
+    return months[month];
+}
