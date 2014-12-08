@@ -146,7 +146,7 @@ MessageBoard.prototype.renderMessage = function(messageId)
         {
             // Tar bort meddelandet från DOMen
             that.removeMessage(messageId);
-                    }
+        }
     };
     
     // Skapar onclick event för "tids"-knappen
