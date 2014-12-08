@@ -45,6 +45,7 @@ MessageBoard.prototype.renderMessageBoard = function(main, _boardId)
     // Skapar behållare för meddelanden
     var messageContainerNode = document.createElement("div");
     messageContainerNode.className="messageContainer";
+    messageContainerNode.setAttribute("id", "messageContainer");
     
     // Skapar element som räknar antal meddelanden
     var numberOfMessages = document.createElement("div");
@@ -146,9 +147,14 @@ MessageBoard.prototype.renderMessage = function(messageId)
     {
         if (confirm("Remove Wow?"))
         {
+            //messageElements[messageId].removeChild(newMessageNode);
             that.removeMessage(messageId);
             // Tar bort meddelandet från DOMen
-            messageElements[messageId].removeChild(newMessageNode); // FUNGERAR EJ MED FLERA MEDDELANDEN
+            //that.messageElements[messageId].removeChild(newMessageNode); // FUNGERAR EJ MED FLERA MEDDELANDEN
+            
+            //this.renderMessages();
+    
+    
         }
     };
     // Skapar onclick event för "tids"-knappen
@@ -168,7 +174,8 @@ MessageBoard.prototype.renderMessage = function(messageId)
 // Funktionalitet för att rensa och skriva ut meddelanden
 MessageBoard.prototype.renderMessages = function()
 {
-    document.getElementsByClassName("messageContainer").innerHTML = "";
+    document.getElementById("messageContainer").innerHTML = ""; 
+    //document.getElementsByClassName("messageContainer")[0].innerHTML = ""; // [0] <-- !
     for (var i = 0; i < this.getMessages().length; i++)
     {
         this.renderMessage(i);
