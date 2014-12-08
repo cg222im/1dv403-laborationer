@@ -107,15 +107,29 @@ MessageBoard.prototype.submitButtonOnClick = function(textArea)
     textArea.value = "";
 };
 
+
+
+
+
+
+
 // Funktionalitet för knappen - Enter key
 MessageBoard.prototype.textAreaEventHandler = function(e)
 {
-    if(!e) e = window.event;
-    if (e.keyCode == 13)
+    
+    if (!e) e = window.event;
+    console.log(e);
+    if (e.keyCode == 13 && !e.shiftKey)
     {
+        alert("test");
         MessageBoard.submitButtonOnClick();
     }
-};
+}; 
+
+
+
+
+
 
 // Funktionalitet för att skriva ut meddelande
 MessageBoard.prototype.renderMessage = function(messageId)
@@ -147,16 +161,12 @@ MessageBoard.prototype.renderMessage = function(messageId)
     {
         if (confirm("Remove Wow?"))
         {
+            // Tar bort meddelandet från DOMen
             //messageElements[messageId].removeChild(newMessageNode);
             that.removeMessage(messageId);
-            // Tar bort meddelandet från DOMen
-            //that.messageElements[messageId].removeChild(newMessageNode); // FUNGERAR EJ MED FLERA MEDDELANDEN
-            
-            //this.renderMessages();
-    
-    
-        }
+                    }
     };
+    
     // Skapar onclick event för "tids"-knappen
     dateAlertNode.onclick = function()
     {
